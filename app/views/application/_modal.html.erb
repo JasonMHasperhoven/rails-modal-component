@@ -1,0 +1,19 @@
+<% ua_ie = request.user_agent =~ /msie |trident\//i %>
+<div class="multi-modal js-m-modal-wrapper<%= ' js-m-modal-ie' if ua_ie %>">
+  <div class="multi-modal__backdrop js-m-modal-backdrop"></div>
+  <% modals.each do |id, options| %>
+    <% if ua_ie %>
+      <div class="modal-wrapper js-m-modal <%= 'js-m-modal-outer' unless options[:dismissable] == false %>" data-modal-id="<%= id.to_s %>" data-modal-level="0">
+        <%= render 'application/modal_dialog', options.merge(ie: true) %>
+      </div>
+    <% else %>
+      <div class="modal-wrapper js-m-modal" data-modal-id="<%= id.to_s %>" data-modal-level="0">
+        <div class="modal-wrapper__table <%= 'js-m-modal-outer' unless options[:dismissable] == false %>">
+          <div class="modal-wrapper__table-cell <%= 'js-m-modal-outer' unless options[:dismissable] == false %>">
+            <%= render 'application/modal_dialog', options %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

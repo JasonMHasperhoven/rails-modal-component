@@ -1,0 +1,48 @@
+<% options = local_assigns %>
+<% if options.has_key?(:html) %>
+  <div class="modal__dialog--remote">
+    <%= options[:html].html_safe %>
+  </div>
+<% else %>
+  <div class="<%= parse_class(['modal__dialog', 'js-m-modal-dialog'] << extract_class_list(options)) %>">
+    <% unless options[:close_button] == false %>
+      <div class="modal__dialog__close modal__dialog__close--mobile js-m-modal-close">
+        &times;
+      </div>
+    <% end %>
+    <div class="modal__dialog__header">
+      <%= options[:title].html_safe %>
+    </div>
+    <div class="modal__dialog__main">
+      <div class="modal__dialog__content">
+        <% if options[:content].start_with?('<') %>
+          <%= options[:content].html_safe %>
+        <% else %>
+          <p>
+            <%= options[:content].html_safe %>
+          </p>
+        <% end %>
+      </div>
+      <div class="modal__dialog__actions">
+        <% if options[:buttons].has_key?(:secondary) %>
+          <% secondary_button_class_list = extract_class_list(options[:buttons][:secondary]) %>
+          <% secondary_button_class_list << 'js-m-modal-close' if options[:buttons][:secondary][:close_on_click] == true %>
+          <% secondary_button_class_list << 'js-m-modal-close-all' if options[:buttons][:secondary][:close_all_on_click] == true %>
+          <% href = "href=#{options[:buttons][:secondary][:href]}" if options[:buttons][:secondary].has_key?(:href) %>
+          <% secondary_button_attributes = tag_options(options[:buttons][:secondary][:attributes]).to_s.html_safe if options[:buttons][:secondary].has_key?(:attributes) %>
+          <a role="button" <%= href.to_s %> class="<%= parse_class(['button', 'button--white', 'modal__dialog__button'] << secondary_button_class_list) %>" <%= secondary_button_attributes.to_s %>>
+            <%= options[:buttons][:secondary][:value] %>
+          </a>
+        <% end %>
+        <% primary_button_class_list = extract_class_list(options[:buttons][:primary]) %>
+        <% primary_button_class_list << 'js-m-modal-close' if options[:buttons][:primary][:close_on_click] == true %>
+        <% primary_button_class_list << 'js-m-modal-close-all' if options[:buttons][:primary][:close_all_on_click] == true %>
+        <% href = "href=#{options[:buttons][:primary][:href]}" if options[:buttons][:primary].has_key?(:href) %>
+        <% primary_button_attributes = tag_options(options[:buttons][:primary][:attributes]).to_s.html_safe if options[:buttons][:primary].has_key?(:attributes) %>
+        <a role="button" <%= href.to_s %> class="<%= parse_class(['button', 'button--blue', 'modal__dialog__button'] << primary_button_class_list) %>" <%= primary_button_attributes.to_s %>>
+          <%= options[:buttons][:primary][:value] %>
+        </a>
+      </div>
+    </div>
+  </div>
+<% end %>

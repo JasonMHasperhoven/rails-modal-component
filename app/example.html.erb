@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <title>Rails Multi Modal</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+</head>
+<body>
+  <a class="js-m-modal-toggle" data-modal-id="delete-card">
+    Delete card
+  </a>
+  <a class="js-m-modal-toggle" data-modal-id="delete-other-card">
+    Delete other card
+  </a>
+  <%= render 'application/modal', modals: {
+    'delete-card': {
+      title: 'Delete card?',
+      content:
+       "<p>Do you wish to delete card:</p>
+        <p>123</p>",
+      buttons: {
+        primary: {
+          value: 'Confirm',
+          attributes: {
+            'data-card-id': '123'
+          }
+        },
+        secondary: {
+          value: 'Cancel',
+          close_on_click: true
+        }
+      }
+    },
+    'delete-other-card': {
+      title: 'Delete card?',
+      content:
+       "<p>Do you wish to delete card:</p>
+        <p>321</p>",
+      buttons: {
+        primary: {
+          value: 'Confirm',
+          attributes: {
+            'data-card-id': '321'
+          }
+        },
+        secondary: {
+          value: 'Cancel',
+          close_on_click: true
+        }
+      }
+    }
+  } %>
+  <%= javascript_include_tag 'application' %>
+</body>
+</html>
