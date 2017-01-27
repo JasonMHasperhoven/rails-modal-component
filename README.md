@@ -1,8 +1,14 @@
 ## Modal
 
-A modal component for Ruby on Rails, to open up a confirm dialog.
+A modal component for Ruby on Rails, to open up a confirm dialog. Allows nested modals as well.
+
+Sets `will-change` css property before animation for optimal performance.
+
+### Installation
 
 Requires SCSS and CommonJS.
+
+Simply copy the files to your project!
 
 #### Modal parameters
 
