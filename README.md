@@ -105,7 +105,7 @@ To fire a modal within javascript you will need to require/import the multi_moda
 ```
 var modal = require('multi_modal');
 
-// initialize after the dom element is loaded (Or inside $(document).ready() or window.load())
+// initialize after the dom element is loaded (Or inside $(document).ready() or window.onload())
 modal.bootstrap();
 
 modal.open('delete-card');
